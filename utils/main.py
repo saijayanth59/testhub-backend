@@ -1,7 +1,7 @@
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
-from utils.constants import generation_config, prompt
+from constants import generation_config, prompt
 from pdf2image import convert_from_path
 import json
 

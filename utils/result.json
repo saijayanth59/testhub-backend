@@ -93,16 +93,16 @@
         "contains_figure_or_diagram": false,
         "options": [
             {
-                "text": "(A) 2^h - 1"
+                "text": "(A) 2h−1"
             },
             {
-                "text": "(B) 2^h - 1 - 1"
+                "text": "(B) 2h−1−1"
             },
             {
-                "text": "(C) 2^h+1 - 1"
+                "text": "(C) 2h+1−1"
             },
             {
-                "text": "(D) 2^h+1"
+                "text": "(D) 2h+1"
             }
         ],
         "question_text": "The height of a binary tree is the maximum number of edges in any root to leaf rath. The maximum number of nodes in a binary tree of height h is:"
@@ -147,16 +147,16 @@
         "contains_figure_or_diagram": false,
         "options": [
             {
-                "text": "(A) [log2n]+1"
+                "text": "A) [log2n]+1"
             },
             {
-                "text": "(B) n"
+                "text": "B) n"
             },
             {
-                "text": "(C) [log2n]"
+                "text": "C) [log2n]"
             },
             {
-                "text": "(D) [log2n]+1"
+                "text": "D) [log2 n]+1"
             }
         ],
         "question_text": "The number of comparisons made in the execution of the loop for any n > 0 is:"
@@ -165,16 +165,16 @@
         "contains_figure_or_diagram": false,
         "options": [
             {
-                "text": "(A) P-3; Q-2; R-1"
+                "text": "A) P-3; Q-2; R-1"
             },
             {
-                "text": "(B) P-1; Q-2; R-3"
+                "text": "B) P-1; Q-2; R-3"
             },
             {
-                "text": "(C) P-2; Q-3; R-1"
+                "text": "C) P-2; Q-3; R-1"
             },
             {
-                "text": "(D) P-1; Q-3; R-2"
+                "text": "D) P-1; Q-3; R-2"
             }
         ],
         "question_text": "Match entries in Group 1 to entries in Group 2."
@@ -183,16 +183,16 @@
         "contains_figure_or_diagram": false,
         "options": [
             {
-                "text": "(A) Context switch time is longer for kernel level threads than for user level threads."
+                "text": "A) Context switch time is longer for kernel level threads than for user level threads."
             },
             {
-                "text": "(B) User level threads do not need any hardware support."
+                "text": "B) User level threads do not need any hardware support."
             },
             {
-                "text": "(C) Related kernel level threads can be scheduled on different processors in a multi-processor system."
+                "text": "C) Related kernel level threads can be scheduled on different processors in a multi-processor system."
             },
             {
-                "text": "(D) Blocking one kernel level thread blocks all related threads."
+                "text": "D) Blocking one kernel level thread blocks all related threads."
             }
         ],
         "question_text": "Which one of the following statements is FALSE?"
@@ -201,16 +201,16 @@
         "contains_figure_or_diagram": false,
         "options": [
             {
-                "text": "(A) Recursive descent parser."
+                "text": "A) Recursive descent parser."
             },
             {
-                "text": "(B) Operator precedence parser."
+                "text": "B) Operator precedence parser."
             },
             {
-                "text": "(C) An LR(k) parser."
+                "text": "C) An LR(k) parser."
             },
             {
-                "text": "(D) An LALR(k) parser."
+                "text": "D) An LALR(k) parser."
             }
         ],
         "question_text": "Which one of the following is a top-down parser?"
@@ -219,16 +219,16 @@
         "contains_figure_or_diagram": false,
         "options": [
             {
-                "text": "(A) Half the baud rate."
+                "text": "A) Half the baud rate."
             },
             {
-                "text": "(B) Twice the baud rate."
+                "text": "B) Twice the baud rate."
             },
             {
-                "text": "(C) Same as the baud rate."
+                "text": "C) Same as the baud rate."
             },
             {
-                "text": "(D) None of the above."
+                "text": "D) None of the above."
             }
         ],
         "question_text": "In Ethernet when Manchester encoding is used, the bit rate is:"
@@ -237,16 +237,16 @@
         "contains_figure_or_diagram": false,
         "options": [
             {
-                "text": "(A) HTTP"
+                "text": "A) HTTP"
             },
             {
-                "text": "(B) Telnet"
+                "text": "B) Telnet"
             },
             {
-                "text": "(C) DNS"
+                "text": "C) DNS"
             },
             {
-                "text": "(D) SMTP"
+                "text": "D) SMTP"
             }
         ],
         "question_text": "Which one of the following uses UDP as the transport protocol?"
@@ -273,13 +273,13 @@
         "contains_figure_or_diagram": false,
         "options": [
             {
-                "text": "-√x (Graph(x) ⇒ Connected(x))"
+                "text": "-¬x (Graph(x) ⇒ Connected(x))"
             },
             {
                 "text": "∃x (Graph(x) ^ ¬Connected(x))"
             },
             {
-                "text": "∀x (-Graph(x)∨ Connected(x))"
+                "text": "∀x(¬Graph(x)∨Connected(x))"
             },
             {
                 "text": "∀x (Graph(x) ⇒ ¬Connected(x))"
@@ -342,6 +342,6 @@
                 "text": "1"
             }
         ],
-        "question_text": "Let A be a 4x4 matrix with eigenvalues -5, -2, 1, 4. Which of the following is an eigenvalue of [A-I], where I is the 4x4 identity matrix?"
+        "question_text": "Let A be a 4×4 matrix with eigenvalues -5, -2, 1, 4. Which of the following is an eigenvalue of [A-I], where I is the 4x4 identity matrix?"
     }
 ]
