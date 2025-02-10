@@ -3,6 +3,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException, BackgroundTasks
 from fastapi.responses import JSONResponse, Response
 from dotenv import load_dotenv
 from bson import ObjectId
+from bson.json_util import dumps
 from utils import generation_config, prompt
 from pdf2image import convert_from_bytes
 import google.generativeai as genai
@@ -25,7 +26,8 @@ image_collection = db["images"]
 
 
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel(model_name="gemini-1.5-flash-8b", generation_config=generation_config)
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash-8b", generation_config=generation_config)
 
 
 @app.get("/")
@@ -41,7 +43,8 @@ async def upload_pdf(file: UploadFile = File(...), background_tasks: BackgroundT
     """
     try:
         if not file.filename.endswith(".pdf"):
-            raise HTTPException(status_code=400, detail="Only PDF files are allowed.")
+            raise HTTPException(
+                status_code=400, detail="Only PDF files are allowed.")
 
         file_bytes = await file.read()
         compressed_data = zlib.compress(file_bytes)
@@ -56,15 +59,19 @@ async def upload_pdf(file: UploadFile = File(...), background_tasks: BackgroundT
         pdf_result = await pdf_collection.insert_one(pdf_document)
         pdf_id = str(pdf_result.inserted_id)
 
-        background_tasks.add_task(extract_images_and_questions, file_bytes, pdf_id)
+        background_tasks.add_task(
+            extract_images_and_questions, file_bytes, pdf_id)
 
         return JSONResponse(
             status_code=201,
-            content={"message": "PDF uploaded successfully.", "pdf_id": pdf_id, "status": "processing"},
+            content={"message": "PDF uploaded successfully.",
+                     "pdf_id": pdf_id, "status": "processing"},
         )
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error uploading PDF: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error uploading PDF: {str(e)}")
+
 
 async def extract_images_and_questions(pdf_bytes: bytes, pdf_id: str):
     """
@@ -87,12 +94,14 @@ async def extract_images_and_questions(pdf_bytes: bytes, pdf_id: str):
             for question in extracted_questions:
                 question_doc = {
                     "pdf_id": pdf_id,
-                    "text": question["text"],
-                    "options": question["options"],
+                    "question_text": question.get("question_text"),
+                    "options": question.get("options"),
                     "answer": question.get("answer"),
-                    "image_id": image_id, 
+                    "image_id": image_id,
+                    "contains_figure_or_diagram": question.get("contains_figure_or_diagram"),
                 }
                 await question_collection.insert_one(question_doc)
+            print(f"Processed image {i + 1} of {len(images)}")
 
         # Mark PDF as processed
         await pdf_collection.update_one({"_id": ObjectId(pdf_id)}, {"$set": {"status": "processed", "processed_at": datetime.now(timezone.utc)}})
@@ -106,63 +115,92 @@ async def get_image(image_id: str):
     """
     Retrieves a stored image from MongoDB, decodes it, and returns it.
     """
-    image = await image_collection.find_one({"_id": ObjectId(image_id)})
-
-    if not image:
-        raise HTTPException(status_code=404, detail="Image not found")
-
     try:
+        image = await image_collection.find_one({"_id": ObjectId(image_id)})
+
+        if not image:
+            raise HTTPException(status_code=404, detail="Image not found")
+
         image_data = base64.b64decode(image["image_data"])
 
         return Response(
-            content=image_data,
-            media_type="image/jpeg",
-            headers={"Content-Disposition": f'attachment; filename="{image_id}.jpg"'},
-        )
+                content=image_data,
+                media_type="image/jpeg",
+                headers={
+                    "Content-Disposition": f'attachment; filename="{image_id}.jpg"'},
+            )
 
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Error retrieving image: {str(e)}")
 
+
 @app.get("/pdf/{pdf_id}")
 async def get_pdf(pdf_id: str):
     """
-    Retrieves a stored PDF from MongoDB, decompresses it, and returns it.
-
-    - Fetches the document by `_id`.
-    - Decodes Base64 and decompresses the file.
-    - Returns the PDF as a downloadable response.
+    Retrieves a stored PDF from MongoDB, decompresses it, and returns it along with its status.
     """
     document = await pdf_collection.find_one({"_id": ObjectId(pdf_id)})
 
     if not document:
         raise HTTPException(status_code=404, detail="PDF not found")
 
+    status = document.get("status", "unknown")  # Extract status separately
+
     try:
         compressed_data = base64.b64decode(document["file"])
         decompressed_pdf = zlib.decompress(compressed_data)
 
+        # Set status in headers instead of mixing with the file response
         return Response(
             content=decompressed_pdf,
             media_type="application/pdf",
             headers={
-                "Content-Disposition": f'attachment; filename="{document["name"]}"'},
+                "Content-Disposition": f'attachment; filename="{document["name"]}"',
+                "X-PDF-Status": status,  # Custom header for status
+            },
         )
 
     except Exception as e:
         raise HTTPException(
-            status_code=500, detail=f"Error retrieving PDF: {str(e)}")
-
+            status_code=500, detail=f"Error retrieving PDF: {str(e)}"
+        )
 
 @app.get("/questions/{pdf_id}")
 async def get_questions(pdf_id: str):
     """
     Retrieves all questions for a given PDF ID.
     """
-    questions = await question_collection.find({"pdf_id": pdf_id}).to_list(length=None)
+    questions = await question_collection.find({"pdf_id": pdf_id}).to_list()
+
+    if not questions:
+        raise HTTPException(status_code=404, detail="No questions found")
+    for question in questions:
+        question["_id"] = str(question["_id"])
+    return questions
+
+
+@app.get("/questions")
+async def get_all_questions():
+    """
+    Retrieves all questions.
+    """
+    questions = await question_collection.find().to_list(length=None)
 
     if not questions:
         raise HTTPException(status_code=404, detail="No questions found")
 
-    return questions
+    return JSONResponse(content=dumps(questions))
 
+
+@app.get("/pdfs")
+async def get_all_pdfs():
+    """
+    Retrieves all PDFs.
+    """
+    pdfs = await pdf_collection.find().to_list(length=None)
+
+    if not pdfs:
+        raise HTTPException(status_code=404, detail="No PDFs found")
+
+    return JSONResponse(content=dumps(pdfs))

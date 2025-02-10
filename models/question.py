@@ -17,10 +17,11 @@ class Question(BaseModel):
 
     id: Optional[PyObjectId] = Field(alias="_id", default=None, description="Unique identifier for the question.")
     pdf_id: PyObjectId = Field(..., description="The ID of the uploaded PDF this question belongs to.")
-    text: str = Field(..., description="The actual question text.")
+    question_text: str = Field(..., description="The actual question text.")
     options: List[str] = Field(..., description="A list of possible answers (options) for the question.")
     answer: Optional[str] = Field(None, description="The correct answer for the question (if available).")
     image: Optional[str] = Field(None, description="URL or base64 string of an associated image (if applicable).")
+    contains_figure_or_diagram: bool = Field(..., description="Indicates if the question or any of its options contain a figure or diagram.")
 
     model_config = ConfigDict(
         populate_by_name=True,
