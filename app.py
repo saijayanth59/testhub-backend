@@ -81,10 +81,7 @@ async def extract_images_and_questions(pdf_bytes: bytes, pdf_id: str):
         images = convert_from_bytes(pdf_bytes)
 
         for i, image in enumerate(images):
-            image_bytes = image.tobytes()
-            encoded_image = base64.b64encode(image_bytes).decode("utf-8")
-
-            image_doc = {"pdf_id": pdf_id, "image_data": encoded_image}
+            image_doc = {"pdf_id": pdf_id, "number": i}
             image_result = await image_collection.insert_one(image_doc)
             image_id = str(image_result.inserted_id)
 
@@ -121,14 +118,7 @@ async def get_image(image_id: str):
         if not image:
             raise HTTPException(status_code=404, detail="Image not found")
 
-        image_data = base64.b64decode(image["image_data"])
-
-        return Response(
-                content=image_data,
-                media_type="image/jpeg",
-                headers={
-                    "Content-Disposition": f'attachment; filename="{image_id}.jpg"'},
-            )
+        return JSONResponse(content=dumps(image))
 
     except Exception as e:
         raise HTTPException(
@@ -165,6 +155,7 @@ async def get_pdf(pdf_id: str):
         raise HTTPException(
             status_code=500, detail=f"Error retrieving PDF: {str(e)}"
         )
+
 
 @app.get("/questions/{pdf_id}")
 async def get_questions(pdf_id: str):
