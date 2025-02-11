@@ -22,7 +22,6 @@ client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
 db = client.hub
 pdf_collection = db["pdfs"]
 question_collection = db["questions"]
-image_collection = db["images"]
 
 
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -81,10 +80,6 @@ async def extract_images_and_questions(pdf_bytes: bytes, pdf_id: str):
         images = convert_from_bytes(pdf_bytes)
 
         for i, image in enumerate(images):
-            image_doc = {"pdf_id": pdf_id, "number": i}
-            image_result = await image_collection.insert_one(image_doc)
-            image_id = str(image_result.inserted_id)
-
             res = model.generate_content([prompt, image])
             extracted_questions = json.loads(res.text)
 
@@ -94,7 +89,7 @@ async def extract_images_and_questions(pdf_bytes: bytes, pdf_id: str):
                     "question_text": question.get("question_text"),
                     "options": question.get("options"),
                     "answer": question.get("answer"),
-                    "image_id": image_id,
+                    "page_number": i + 1,
                     "contains_figure_or_diagram": question.get("contains_figure_or_diagram"),
                 }
                 await question_collection.insert_one(question_doc)
@@ -106,23 +101,6 @@ async def extract_images_and_questions(pdf_bytes: bytes, pdf_id: str):
     except Exception as e:
         print(f"Error processing PDF {pdf_id}: {e}")
 
-
-@app.get("/image/{image_id}")
-async def get_image(image_id: str):
-    """
-    Retrieves a stored image from MongoDB, decodes it, and returns it.
-    """
-    try:
-        image = await image_collection.find_one({"_id": ObjectId(image_id)})
-
-        if not image:
-            raise HTTPException(status_code=404, detail="Image not found")
-
-        return JSONResponse(content=dumps(image))
-
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error retrieving image: {str(e)}")
 
 
 @app.get("/pdf/{pdf_id}")
