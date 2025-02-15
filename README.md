@@ -32,7 +32,7 @@ pip install -r requirements.txt
 Create a `.env` file or set environment variables in your system:
 
 ```
-MONGODB_URL=mongodb+srv://your_username:your_password@cluster.mongodb.net/testhub
+MONGODB_URL=your_mongoDB_url
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
