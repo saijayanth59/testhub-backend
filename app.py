@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 from fastapi import FastAPI, UploadFile, File, HTTPException, BackgroundTasks
 from fastapi.responses import JSONResponse, Response
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from bson import ObjectId
 from bson.json_util import dumps
@@ -18,6 +19,15 @@ load_dotenv()
 app = FastAPI(
     title="TestHub API",
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=True,
+)
+
 client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
 db = client.hub
 pdf_collection = db["pdfs"]
@@ -100,7 +110,6 @@ async def extract_images_and_questions(pdf_bytes: bytes, pdf_id: str):
 
     except Exception as e:
         print(f"Error processing PDF {pdf_id}: {e}")
-
 
 
 @app.get("/pdf/{pdf_id}")
