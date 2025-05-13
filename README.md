@@ -121,3 +121,5 @@ Returns a list of PDFs.
 ## Wanna Contribute?
 
 Read [CONTRIBUTE.md](./CONTRIBUTE.md) for guidelines on how to contribute.
+
+BY JAY
