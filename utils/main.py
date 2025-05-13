@@ -1,45 +1,77 @@
-import os
-import google.generativeai as genai
-from dotenv import load_dotenv
-from constants import generation_config, prompt
-from pdf2image import convert_from_path
+from google import genai
+from google.genai import types
 import json
-
+from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
-api_key = os.getenv("GEMINI_API_KEY")
-genai.configure(api_key=api_key)
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 
-def upload_to_gemini(path, mime_type=None):
-    file = genai.upload_file(path, mime_type=mime_type)
-    return file
+def process_pdf(pdf_path):
+    model = "gemini-2.5-flash-preview-04-17"
+    config = types.GenerateContentConfig(
+        response_mime_type='application/json',
+        response_schema={
+            "required": ["subject", "questions"],
+            "type": "OBJECT",
+            "properties": {
+                "subject": {
+                    "type": "STRING",
+                    "description": "The subject of the PDF file."
+                },
+                "questions": {
+                    "type": "ARRAY",
+                    "items": {
+                        "type": "OBJECT",
+                        "required": ["question", "is_image_question", "answers"],
+                        "properties": {
+                            "question": {
+                                "type": "STRING",
+                                "description": "The question extracted from the PDF file."
+                            },
+                            "answers": {
+                                "type": "ARRAY",
+                                "items": {
+                                    "type": "STRING",
+                                    "description": "The answer to the question extracted from the PDF file."
+                                },
+                                "description": "The answers to the question extracted from the PDF file."
+                            },
+                            "options": {
+                                "type": "ARRAY",
+                                "items": {
+                                    "type": "STRING",
+                                    "description": "The options for the question extracted from the PDF file."
+                                },
+                                "description": "The options for the question extracted from the PDF file."
+                            },
+                            "is_image_question": {
+                                "type": "BOOLEAN",
+                                "description": "Does the question required image to answer"
+                            },
+                        }
+                    },
+                    "description": "The questions extracted from the PDF file."
+                }
+            },
+        }
+    )
 
+    pdf = client.files.upload(file=pdf_path)
 
-model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash-8b",
-    generation_config=generation_config,
-)
-
-
-def extract_images_from_pdf(pdf_path, output_dir="output_images"):
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    images = convert_from_path(pdf_path)
-    questions = []
-    for i, image in enumerate(images):
-        res = model.generate_content([prompt, image])
-        questions.extend(json.loads(res.text))
-        print(f"Extracted question {i+1} from the input image.")
-
-    with open("result.json", "w", encoding="utf-8") as json_file:
-        json.dump(questions, json_file, ensure_ascii=False, indent=4)
-
-    return questions
+    response = client.models.generate_content(
+        model=model,
+        contents=["Extract questions, answers and options from the PDF file.", pdf],
+        config=config
+    ).text
+    return json.loads(response)
 
 
 if __name__ == "__main__":
-    pdf_path = "GATE2007-3-5.pdf"
-    print(extract_images_from_pdf(pdf_path))
+    pdf_path = "test.pdf"
+    result = process_pdf(pdf_path)
+    print(result)
+    with open("output.json", "w") as json_file:
+        json.dump(result, json_file, indent=4)

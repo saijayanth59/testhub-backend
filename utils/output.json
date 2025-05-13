@@ -1,0 +1,308 @@
+{
+    "subject": "Probability and Statistics",
+    "questions": [
+        {
+            "question": "A jar contains three marbles numbered 1, 2, and 3. If two marbles are drawn without replacement, what is the probability that the sum of the numbers is 5?",
+            "answers": [
+                "1/3"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "A jar contains three marbles numbered 1, 2, and 3. If two marbles are drawn with replacement, what is the probability that the sum of the numbers is at least 4 ?",
+            "answers": [
+                "2/3"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "If two dice are rolled, find the probability that the sum of the faces of the dice is 7.",
+            "answers": [
+                "1/6"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "Two dice are thrown at a time , find the probability of the following :\n(i) The number shown are equal\n(ii) The difference of number shown is 1",
+            "answers": [
+                "1/6",
+                "5/18"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "Three coins are tossed together, then find the probabilities of the following:\n(i) Getting exactly two head\n(ii) Getting at least two tails.",
+            "answers": [
+                "3/8",
+                "1/2"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "A box contains cards numbered 3,5,7,9,....35, 37. A card is drawn at random form the box. Find the probability that the drawn card have either multiples of 7 or a prime number.",
+            "answers": [
+                "5/6"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "The probability that a person will get an electrification contract is 3/5 and the probability that he will not get plumbing contract is 5/8. The probability of getting atleast one contract is 5/7. What is the probability that he will get both ?",
+            "answers": [
+                "73/280"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "Neha has 4 yellow t-shirts, 6 black t-shirts, and 2 blue t-shirts to choose for her outfit today. She chooses a t-shirt randomly with each t-shirt equally likely to be chosen. Find the probability that a black or blue t-shirt is chosen for the outfit.",
+            "answers": [
+                "C"
+            ],
+            "options": [
+                "8/13",
+                "5/6",
+                "2/3",
+                "7/12"
+            ],
+            "is_image_question": false
+        },
+        {
+            "question": "The probabilty of an event A occurring is 0.5 and of B occurring is 0.3. If A and B are mutually exclusive events, then the probability of neither A nor B occuring is :",
+            "answers": [
+                "D"
+            ],
+            "options": [
+                "0.6",
+                "0.5",
+                "0.7",
+                "0.2"
+            ],
+            "is_image_question": false
+        },
+        {
+            "question": "A and B are two events and A denotes the complements of A.\nConsider the following statements :\n(i) P (A\u222aB) \u2264 P (B) + P (A)\n(ii) P (A) + P (A\u222aB) \u2264 1 + P (B)\nWhich of the above statements is/are correct ?",
+            "answers": [
+                "C"
+            ],
+            "options": [
+                "Only I",
+                "Only II",
+                "Both I and II",
+                "Neither I nor II"
+            ],
+            "is_image_question": false
+        },
+        {
+            "question": "Three intergers are chosen at random from the first 20 integers. The Probability that their product is even?",
+            "answers": [
+                "C"
+            ],
+            "options": [
+                "2/19",
+                "3/29",
+                "17/19",
+                "4/29"
+            ],
+            "is_image_question": false
+        },
+        {
+            "question": "If the letters of word 'REGULATIONS' be arranged at random, the probability that there will be exactly 4 letters between R and E is :",
+            "answers": [
+                "A"
+            ],
+            "options": [
+                "6/55",
+                "3/55",
+                "49/55",
+                "None of these"
+            ],
+            "is_image_question": false
+        },
+        {
+            "question": "A and B play a game where each is asked to select a number from 1 to 25. If the two numbers match both of them win a prize. The probability that they will not win a prize in a single trial is :",
+            "answers": [
+                "B"
+            ],
+            "options": [
+                "1/25",
+                "24/25",
+                "2/25",
+                "None of these"
+            ],
+            "is_image_question": false
+        },
+        {
+            "question": "The probability that out of 10 persons, all born in April, at least two have the same birthday is :",
+            "answers": [
+                "C"
+            ],
+            "options": [
+                "30C10/(30)10",
+                "1 - 30C10/(30)!",
+                "(30)10-30C10/(30)10",
+                "None of these"
+            ],
+            "is_image_question": false
+        },
+        {
+            "question": "A bag contains 5 white and 8 red balls. Two successive drawings of 3 balls are made such that the balls are replaced before the second drawing. Find the probability that the first drawing will give 3 white and the second 3 red balls in each case.",
+            "answers": [
+                "140/20,449"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "A bag contains 5 white and 3 red balls and four balls are sucessively drawn and are not placed. What is the chance that white and red balls appear alternatively.",
+            "answers": [
+                "1/14"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "Suppose a box contains 10 white balls and 8 black balls. What is the probability of drawing 2 white and 1 black balls for the following three cases ?\na)All the three balls picked in a single draw\nb)All the three balls drawn one after another with (replacement case)\nc)All the three balls drawn one after another (without replacement case)",
+            "answers": [
+                "15/34",
+                "100/729",
+                "5/34"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "A can hit a target 4 times in 5 shots. B 3 times in 4 shots and C twice in 3 shots. They fire a volley. What is the probability that :\n(a) Two shots hit the target.\n(b) At least two shots hit the target.",
+            "answers": [
+                "13/30",
+                "5/6"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "A problem is given to students A, B, C whose chances of solving it is 1/2, 1/4, 3/4. What is the probability that the problem will be solved?",
+            "answers": [
+                "29/32"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "There are two packs of card. One card is drawn at random from each pack. What is the probability that :\n(i) Both of them are black\n(ii) They are of different in colour",
+            "answers": [
+                "1/4",
+                "1/2"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "In a batch Of 100 resistors Of 1kiloohm resistance, 80 numbers are within the required tol\u00e9rance values and II numbers are below the required tolerance values, the remaining are above the required tolerance values. If two resistors are drawn one after the other without replacement, the probability of the first one drawn is below and the second one drawn is above the required tolerance value is :",
+            "answers": [
+                "A"
+            ],
+            "options": [
+                "0.01",
+                "0.09",
+                "0.11",
+                "0.89"
+            ],
+            "is_image_question": false
+        },
+        {
+            "question": "A bag contains 5 white and 4 black balls. A ball is drawn from this bag and is replaced and then second draw of a ball is made. What is the probability that two balls are of different colors.",
+            "answers": [
+                "40/81"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "In a clase 40% student read mathematics, 25% Biology and 15% both Mathematics and Biology. One student was selected at random. Find\n(i) The probability that he reads Mathematics if it is known that he reads Biology.\n(ii) The probability that he reads Biology if it is known that he reads Mathematics.",
+            "answers": [
+                "3/5",
+                "3/8"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "A dice is rolled twice and the sum of the numbers appearing on them is observed to be 7. What is the conditional probability that the number 2 has appeared at least once ?",
+            "answers": [
+                "1/3"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "A family has 2 children. Given that one of the children is a boy, what is the probability that the other child is also a boy?",
+            "answers": [
+                "1/3"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "A coin is tossed once. If it shows head,it is tossed again and if ir showns tail, then a dice is thrown. Let E\u2081 be the event the first throw of coin shows tail and E2 be the dice shows a number greater than 4. Find P (E2|E1).",
+            "answers": [
+                "1/3"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "It is estimated that 50% of emails are spam emails. Some software has been applied to filter these spam emails before they reach your inbox. A certain brand of software claims that it can detect 99% of spam emails, and the probability for a false positive (a non-spam email detected as spam) is 5%.\nNow if an email is detected as spam, then what is the probability that it is in fact a non-spam email?",
+            "answers": [
+                "5/104"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "Three persons A, B and C have applied for a job in a private company. The chance of their selections is in the ratio 1:2:4. The probabilities that A, B and C can introduce changes to improve the profits of the company are 0.8, 0.5 and 0.3, respectively. If the change does not take place, find the probability that it is due to the appointment of C.",
+            "answers": [
+                "0.7"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "A bag contains 4 balls. Two balls are drawn at random and are found to be blue. What is the probability that all balls in the bag are blue ?",
+            "answers": [
+                "3/5"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "In a bolt factory, machines A, B, C manufactures respectively 25%, 35%, 40% of the total bolts of there output and 5%, 4%, 2% are respectively defective bolts. A bolt is drawn at random from the product. What is the probability that the bolt drawn is defective ?",
+            "answers": [
+                "0.00345"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "Suppose the test for HIV is 99% accurate in both directions and 0.3% of the population is HIV positive. If someone tests positive, what is the probability they actually are HIV positive ?",
+            "answers": [
+                "23%"
+            ],
+            "options": [],
+            "is_image_question": false
+        },
+        {
+            "question": "In a neighbourhood, 90% children were falling sick due flu and 10% due to measles and no other disease. The probability of observing rashes for measles is 0.95 and for flu is 0.08. If a child develops rashes, find the child's probability of having flu.",
+            "answers": [
+                "0.43"
+            ],
+            "options": [],
+            "is_image_question": false
+        }
+    ]
+}
